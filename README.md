@@ -10,7 +10,7 @@ can be installed several ways from one source:
 
 - as plain skill folders, through [`npx skills`](https://skills.sh), for any agent;
 - as a Claude Code plugin marketplace, through `.claude-plugin/marketplace.json`;
-- as a git clone you link into your agent, for editing and contributing.
+- from a local clone, through `npx skills`, for trying out changes before a PR.
 
 ## Plugins
 
@@ -64,18 +64,24 @@ for example `/ticket-workflow:ticket-apply`.
 For a private repo, Claude Code clones with your shell's git credentials (SSH
 keys or a credential helper), or with `GITHUB_TOKEN` if it's set.
 
-### Option 3: Clone and link (for editing and contributing)
+### Option 3: From a local clone (for trying out changes)
+
+`npx skills` also installs from a path on disk. Pass the same `--skill` list as
+Option 1:
 
 ```bash
 git clone git@github.com:rreinhardt9/ai-skills.git ~/dev/ai-skills
-for s in ~/dev/ai-skills/plugins/<plugin>/skills/*; do
-  ln -sfn "$s" ~/.claude/skills/"$(basename "$s")"
-done
+npx skills add ~/dev/ai-skills -g --skill <skill> --skill <skill> ... -y
 ```
 
-Claude Code reads `~/.claude/skills`, and so does OpenCode. For agents that only
-read `~/.agents/skills`, link there instead. Changes apply as soon as you save,
-and `git pull` updates the skills.
+This copies the clone's current files rather than linking to them, so edits in
+the clone take effect only when you run the command again. `npx skills update`
+skips skills installed from a path, and `npx skills check -g` lists them as
+"Local path", which reminds you which skills aren't on the released version.
+Its suggested update command omits `--skill`, which would install every skill
+in the repo, so keep passing your list.
+
+To go back to the released version, run Option 1's command again.
 
 ## Using skills in OpenCode
 
@@ -106,18 +112,30 @@ plugins/
 
 ## Contributing
 
-To try out a change before opening a PR:
+To try out a change to an existing skill before opening a PR:
 
-1. **Clone** the repo, or fork it if you don't have write access.
-2. **Point your agent at the clone** for the skills you're changing, using
-   Option 3's `ln -sfn` command. If you installed through the Claude Code
-   plugin, disable it first so you don't load two copies:
+1. **Clone** the repo, or fork it if you don't have write access, and create a
+   branch.
+2. **Edit the skill in your clone.** When asking an agent to make the change,
+   point it at the clone. By default it edits the installed copy it loaded,
+   and your next install overwrites that copy.
+3. **Install from your clone** with Option 3, passing every skill in the
+   plugin. Skills in a plugin can read each other's files, so installing only
+   some of them mixes your version with the released one. If you use the Claude
+   Code plugin, disable it first so you don't load two copies:
    `claude plugin disable <plugin>@ai-skills`.
-3. **Experiment.** The agent reads your working copy, so you can ask it to
-   change the skill directly.
-4. **Open a PR** from a branch.
-5. **Switch back** after it merges: re-enable the plugin or run
-   `npx skills update -g`, or keep the links and `git pull`.
+4. **Try it in a new session.** Repeat steps 2–4 until you're happy with it.
+5. **Open a PR**, or throw the branch away.
+6. **Switch back** to the released version with Option 1's command, or
+   re-enable the plugin, once the PR merges or you've abandoned it.
+
+### Developing a new skill
+
+While a skill changes a lot, keep it out of this repo: write it directly in
+your agent's skills directory (for example `~/.claude/skills/<skill>/`), where
+every edit takes effect immediately. When it's ready to share, move it into a
+plugin as described below, then install it from your clone (Option 3) to
+replace your working copy.
 
 Guidelines:
 
