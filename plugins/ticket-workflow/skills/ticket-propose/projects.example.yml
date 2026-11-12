@@ -19,7 +19,7 @@ your-org/github-projects-repo:
     Rails app tested with Minitest: `bin/rails test`, system tests with `bin/rails test:system`.
   rules:
     tasks:
-      - The first task in each group is a failing system or integration test for that group's scenarios.
+      - The first task in each group covers that group's scenarios with failing tests at the cheapest level that exercises them; system tests only for paths that need a browser.
   apply_guidance:
     - Run `bin/rubocop` on changed Ruby files before checking a task off.
 
@@ -40,6 +40,6 @@ your-org/jira-repo:
     Rails app tested with RSpec. Follow the repo's CLAUDE.md for test commands.
   rules:
     tasks:
-      - The first task in each group is a failing feature or request spec for that group's scenarios; unit specs follow as the work moves inward.
+      - The first task in each group covers that group's scenarios with failing specs at the cheapest level that exercises them; feature specs only for paths that need a browser.
   apply_guidance:
     - Run `bundle exec rubocop` on changed Ruby files before checking a task off.

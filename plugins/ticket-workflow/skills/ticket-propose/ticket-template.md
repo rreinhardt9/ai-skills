@@ -75,6 +75,10 @@ Resolve any other open question with the user before writing Tasks.
   Only `- [x]` counts as done.
 - Make tasks small enough for one session, and order them by dependency.
 - Every group lands its own tests. Never put testing in a final group; a final
-  group is only for integration checks. Within a group, the first task is the
-  failing test for that group's scenarios.
+  group is only for integration checks. Within a group, the first task covers
+  that group's scenarios with failing tests.
+- Write a test task as the scenarios it covers. Name an existing test to extend
+  when one fits. Name a test level only when the scenario needs it (for example,
+  a browser for JavaScript behavior); otherwise apply picks the cheapest level
+  that exercises the behavior.
 - The tasks should cover the acceptance criteria, and nothing more.

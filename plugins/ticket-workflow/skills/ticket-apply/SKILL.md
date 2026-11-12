@@ -34,15 +34,39 @@ describes.
 Show progress as "N/M tasks complete". Then, for each unchecked task in order:
 
 1. Say which task you're on.
-2. Work outside-in. When the task is a test, write it from the ticket's
-   scenarios and confirm it fails for the expected reason. When it's
-   implementation, make the smallest change that moves the failing test forward.
+2. Work outside-in. When the task is a test:
+   - Search the whole test suite for tests that already cover its scenarios,
+     not only the files the task names.
+   - Extend an existing test where one fits, and add a new one only where none
+     does. Use the cheapest level that exercises the behavior. The scenarios
+     are the contract; the file and level a task names are guidance, so
+     choosing differently isn't narrowing scope and doesn't need a pause.
+   - Confirm each new or changed test fails for the expected reason. A new test
+     that already passes usually means something else covers it; find that
+     test before keeping the new one.
+
+   When it's implementation, make the smallest change that moves the failing
+   test forward.
 3. Run the task's stated verification, and everything in the config's
    `apply_guidance`.
 4. Check the task off only when its behavior is fully implemented and verified.
    Never check off partial or deferred work. Re-fetch the body right before
    editing it, confirm the checkbox still matches the task, then make a
    targeted edit.
+
+## Keep the tests concise
+
+The tests are the living spec, so changing a behavior includes tidying the
+tests that describe it. Before checking off a group, list the tests for each of
+its scenarios, wherever they live and whether or not this ticket added them.
+Where two prove the same thing at the same level, merge them or remove one.
+
+- Before removing a test, name the test that still proves what it proved. If
+  none does, keep it, or move its assertion into the test that stays.
+- Note each removed or merged test and what now covers it, for the finish
+  report and the PR description.
+- Duplicate tests for behavior this ticket doesn't change: mention them, don't
+  change them.
 
 ## When to pause
 
@@ -64,6 +88,8 @@ When you pause:
 
 ## 4. Finish
 
-When every task is checked off, report what was completed this session.
+When every task is checked off, report what was completed this session,
+including any test placed somewhere other than where its task named, and each
+test removed or merged with what now covers it.
 Suggest running `ticket-verify` before opening a pull request. Commit only if
 the user asks you to.
