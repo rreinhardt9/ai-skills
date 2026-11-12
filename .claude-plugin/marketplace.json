@@ -1,0 +1,24 @@
+{
+  "name": "ai-skills",
+  "owner": {
+    "name": "Ross Reinhardt"
+  },
+  "metadata": {
+    "description": "Ross Reinhardt's agent skills",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ticket-workflow",
+      "description": "Explore, propose, apply, and verify changes using a project-tracker ticket as the living spec",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/ticket-explore",
+        "./skills/ticket-propose",
+        "./skills/ticket-apply",
+        "./skills/ticket-verify"
+      ]
+    }
+  ]
+}
