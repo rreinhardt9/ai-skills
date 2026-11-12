@@ -167,3 +167,7 @@ Guidelines:
    - have the skills offer to set up missing config instead of just stopping,
      ideally through a `<prefix>-setup` skill people can also run directly;
    - keep secrets in environment variables, never in config files.
+
+## License
+
+[MIT](LICENSE)
