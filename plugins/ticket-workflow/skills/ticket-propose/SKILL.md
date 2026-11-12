@@ -34,7 +34,9 @@ skill's own directory.
 ## 3. Create
 
 1. **Ground the plan.** Draw on the conversation, and read the relevant code and
-   tests. Don't ask the user for facts you can check.
+   tests. Don't ask the user for facts you can check. For each scenario, search
+   the whole test suite for tests that already cover it, even partly or with
+   stubs, so the tasks can extend them instead of adding new ones.
 2. **Resolve open questions that change the plan.** If an unknown would change
    the acceptance criteria, the approach, or the tasks, ask the user before
    writing anything. Only questions that can truly wait belong in Design.
@@ -46,6 +48,8 @@ skill's own directory.
    - The scenarios describe behavior, not implementation.
    - The tasks cover the acceptance criteria, and nothing more.
    - Every task group lands its own tests, and every task says how to verify it.
+   - Test tasks say which scenarios to cover and name any existing tests to
+     extend. They don't fix a test level unless the scenario needs one.
    - Nothing contradicts the conversation.
 
    Fix anything that fails.
@@ -65,6 +69,8 @@ skill's own directory.
    sections. Typical problems are:
    - a scenario with no task;
    - a task that serves no scenario;
+   - a test task that adds a test where an existing one already covers the
+     scenario;
    - a design decision the tasks ignore;
    - a scope item that is missing from the acceptance criteria.
 3. Propose the edits one section at a time. For each, show what would change and

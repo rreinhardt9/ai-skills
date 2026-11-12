@@ -26,7 +26,9 @@ test that passes.
 **Correctness**
 - For each scenario, find the test that exercises it and note its `file:line`.
   A scenario with no test is CRITICAL. A test that only loosely matches the
-  scenario is a WARNING.
+  scenario is a WARNING. Two tests proving the same thing at the same level, or
+  a browser test where a cheaper test would exercise the behavior, is a
+  SUGGESTION.
 - Run the matched tests. A failing test is CRITICAL.
 - Confirm the code actually delivers each requirement's behavior, not only that
   a test exists. A divergence is a WARNING.
@@ -68,8 +70,9 @@ If you couldn't run a check (for example, the tests won't run), mark it
 Show the report. If nothing is CRITICAL and every check ran, ask whether to do
 any of the following, and do only what the user confirms:
 - post the report as a ticket comment;
-- commit, push, and open a PR that summarizes the change and links the ticket
-  the way the backend describes;
+- commit, push, and open a PR that summarizes the change, lists any tests
+  removed or merged with what now covers them, and links the ticket the way
+  the backend describes;
 - move the ticket to `in_review`.
 
 If anything is CRITICAL, list what to fix. If the plan itself was wrong,
