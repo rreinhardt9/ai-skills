@@ -16,8 +16,10 @@ skill's own directory.
 
 1. Find the repo key with `gh repo view --json nameWithOwner -q .nameWithOwner`.
 2. Find that key in `~/.config/ticket-workflow/projects.yml`. If the file or the
-   key is missing, stop. Tell the user, and point them to the setup steps in
-   `backends/<backend>.md` and the sample entries in `projects.example.yml`.
+   key is missing, tell the user which one, and offer to set it up now. If they
+   agree, follow the `ticket-setup` skill in the sibling directory
+   `../ticket-setup/`, then continue with their original request. If they
+   decline, stop.
 3. Read `backends/<backend>.md`. Do every tracker operation exactly as it
    describes.
 4. Read `ticket-template.md`.

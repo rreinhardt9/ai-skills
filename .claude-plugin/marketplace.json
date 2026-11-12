@@ -5,15 +5,17 @@
   },
   "metadata": {
     "description": "Ross Reinhardt's agent skills",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
   },
   "plugins": [
     {
       "name": "ticket-workflow",
       "description": "Explore, propose, apply, and verify changes using a project-tracker ticket as the living spec",
-      "source": "./",
+      "source": "ticket-workflow",
       "strict": false,
       "skills": [
+        "./skills/ticket-setup",
         "./skills/ticket-explore",
         "./skills/ticket-propose",
         "./skills/ticket-apply",
