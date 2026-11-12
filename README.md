@@ -10,7 +10,8 @@ can be installed several ways from one source:
 
 - as plain skill folders, through [`npx skills`](https://skills.sh), for any agent;
 - as a Claude Code plugin marketplace, through `.claude-plugin/marketplace.json`;
-- from a local clone, through `npx skills`, for trying out changes before a PR.
+- from a local clone, through `npx skills`, for trying out changes before a PR;
+- from a branch on GitHub, through `npx skills`, for trying out a PR's changes.
 
 ## Plugins
 
@@ -83,6 +84,22 @@ in the repo, so keep passing your list.
 
 To go back to the released version, run Option 1's command again.
 
+### Option 4: From a branch (for reviewing a PR)
+
+`npx skills` also installs from a branch on GitHub, named after `#`, with no
+clone needed. Pass the same `--skill` list as Option 1:
+
+```bash
+npx skills add rreinhardt9/ai-skills#<branch> -g --skill <skill> --skill <skill> ... -y
+```
+
+The branch is remembered, so `npx skills update -g` pulls new commits pushed to
+it, such as fixes made during review. For a PR from a fork, use the fork's name
+in place of `rreinhardt9/ai-skills`.
+
+To go back to the released version, run Option 1's command again, which also
+forgets the branch.
+
 ## Using skills in OpenCode
 
 OpenCode loads skills automatically from your request. To get a slash command,
@@ -125,7 +142,8 @@ To try out a change to an existing skill before opening a PR:
    Code plugin, disable it first so you don't load two copies:
    `claude plugin disable <plugin>@ai-skills`.
 4. **Try it in a new session.** Repeat steps 2–4 until you're happy with it.
-5. **Open a PR**, or throw the branch away.
+5. **Open a PR**, or throw the branch away. Reviewers can try your change
+   by installing your branch with Option 4 in place of Option 3 in step 3.
 6. **Switch back** to the released version with Option 1's command, or
    re-enable the plugin, once the PR merges or you've abandoned it.
 
