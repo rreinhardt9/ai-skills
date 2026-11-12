@@ -11,13 +11,16 @@ This skill never implements anything.
 
 ## 1. Load the project
 
+Paths below starting `backends/` or `ticket-template.md` are relative to this
+skill's own directory.
+
 1. Find the repo key with `gh repo view --json nameWithOwner -q .nameWithOwner`.
-2. Find that key in `~/.config/ticket-workflow/projects.yml`. If it's missing,
-   stop. Tell the user, and point them to the setup steps in
-   `~/.config/ticket-workflow/backends/<backend>.md`.
-3. Read `~/.config/ticket-workflow/backends/<backend>.md`. Do every tracker
-   operation exactly as it describes.
-4. Read `~/.config/ticket-workflow/ticket-template.md`.
+2. Find that key in `~/.config/ticket-workflow/projects.yml`. If the file or the
+   key is missing, stop. Tell the user, and point them to the setup steps in
+   `backends/<backend>.md` and the sample entries in `projects.example.yml`.
+3. Read `backends/<backend>.md`. Do every tracker operation exactly as it
+   describes.
+4. Read `ticket-template.md`.
 5. Treat the entry's `context` and its `rules.<section>` as constraints to
    follow. Don't copy them into the ticket.
 

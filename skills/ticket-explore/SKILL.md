@@ -33,7 +33,8 @@ discussion doesn't have to reach a conclusion.
 ## Exploring an existing ticket
 
 If the user names a ticket, load the project config and read the ticket the
-way `ticket-propose` describes. Point out where the discussion departs from
+way `ticket-propose` describes. Its `SKILL.md` and bundled files are in the
+sibling directory `../ticket-propose/`. Point out where the discussion departs from
 what it says, for example "The ticket scopes this to X, but we're now saying
 Y." When a decision changes what the ticket says, offer to update it. Name the
 section and the edit, and make it only after the user says yes in a separate

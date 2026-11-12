@@ -1,0 +1,45 @@
+# Copy to ~/.config/ticket-workflow/projects.yml and replace the placeholders.
+# Keyed by `gh repo view --json nameWithOwner -q .nameWithOwner` run in the checkout.
+# Backend setup steps live in backends/<backend>.md.
+
+your-org/github-projects-repo:
+  backend: github
+  project:
+    owner: your-org
+    number: 1
+    id: PVT_xxxxxxxxxxxxxxxxxxxx
+    status_field_id: PVTSSF_xxxxxxxxxxxxxxxxxxxx
+    statuses:
+      proposed: { name: Backlog, option_id: xxxxxxxx }
+      ready: { name: Todo, option_id: xxxxxxxx }
+      in_progress: { name: In Progress, option_id: xxxxxxxx }
+      in_review: { name: In Review, option_id: xxxxxxxx }
+      done: { name: Done, option_id: xxxxxxxx }
+  context: |
+    Rails app tested with Minitest: `bin/rails test`, system tests with `bin/rails test:system`.
+  rules:
+    tasks:
+      - The first task in each group is a failing system or integration test for that group's scenarios.
+  apply_guidance:
+    - Run `bin/rubocop` on changed Ruby files before checking a task off.
+
+your-org/jira-repo:
+  backend: jira
+  jira:
+    site: your-site.atlassian.net
+    email: you@example.com
+    project_key: ABC
+    issue_type: Task
+  statuses:
+    proposed: { name: Backlog }
+    ready: { name: To Do }
+    in_progress: { name: In Progress }
+    in_review: { name: In Review }
+    done: { name: Done }
+  context: |
+    Rails app tested with RSpec. Follow the repo's CLAUDE.md for test commands.
+  rules:
+    tasks:
+      - The first task in each group is a failing feature or request spec for that group's scenarios; unit specs follow as the work moves inward.
+  apply_guidance:
+    - Run `bundle exec rubocop` on changed Ruby files before checking a task off.

@@ -13,7 +13,8 @@ unchecked task.
 ## 1. Load the project and the ticket
 
 1. Load the project config, backend, and template the way `ticket-propose`
-   step 1 describes.
+   step 1 describes. Its `SKILL.md` and bundled files are in the sibling
+   directory `../ticket-propose/`.
 2. If the user didn't name a ticket, ask which one to use.
 3. Read the ticket fresh, including its comments, and look up its current stage.
 4. Announce which ticket you're using, and how to choose a different one.

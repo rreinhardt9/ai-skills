@@ -12,7 +12,8 @@ test that passes.
 ## 1. Gather evidence
 
 1. Load the project config, backend, and template the way `ticket-propose`
-   step 1 describes.
+   step 1 describes. Its `SKILL.md` and bundled files are in the sibling
+   directory `../ticket-propose/`.
 2. Read the ticket fresh, including its comments.
 3. Collect the change with `git diff <default-branch>...HEAD` plus any
    uncommitted changes.
