@@ -3,7 +3,8 @@
 Each ticket is a Jira issue, and its status is its stage. Fill in the
 placeholders from the project's entry in `projects.yml`: `<site>`, `<email>`,
 `<project_key>`, `<issue_type>`, and a stage's status `name`. `$TMP` means your
-scratchpad or temp directory, and `$B` means the `jira/` directory next to this file.
+scratchpad or temp directory, and `$B` means the skill's `scripts/` directory
+(`../scripts/` from this file).
 
 Descriptions are stored as ADF (Atlassian Document Format, JSON). **Never write a
 description through `jira issue create -b` or `jira issue edit -b`, and never

@@ -1,7 +1,9 @@
 # ai-skills
 
-Agent skills for coding agents, written to the open
-[Agent Skills](https://agentskills.io/) format: a folder with a `SKILL.md`.
+Agent skills for coding agents. Every skill follows the open
+[Agent Skills](https://agentskills.io/) format, as defined in its
+[specification](https://agentskills.io/specification): a folder with a
+`SKILL.md`, plus optional `scripts/`, `references/`, and `assets/` folders.
 Claude Code, OpenCode, Codex, Cursor, and other agents that read that format
 can load them.
 
@@ -124,7 +126,11 @@ plugins/
   <plugin>/
     README.md               what the plugin does, its requirements, setup, and usage
     skills/
-      <skill>/SKILL.md      plus any files the skill reads
+      <skill>/
+        SKILL.md            frontmatter (name, description, compatibility) and instructions
+        scripts/            code the agent runs
+        references/         docs the agent reads when it needs them
+        assets/             templates and example files
 ```
 
 ## Contributing
@@ -169,8 +175,16 @@ Guidelines:
   skill folders, so files at the plugin root or repo root never reach those
   installs. Skills in the same plugin can share files through a sibling path
   like `../other-skill/`.
-- **Validate before pushing:** `claude plugin validate .`, and
-  `npx skills add . --list` to confirm `npx skills` finds every skill.
+- **Follow the [Agent Skills specification](https://agentskills.io/specification).**
+  The `name` matches the folder name. The `description` says what the skill
+  does and when to use it. Add `compatibility` when the skill needs CLIs or
+  environment variables. Put code in `scripts/`, extra docs in `references/`,
+  and templates or examples in `assets/`, and refer to them by paths relative
+  to the skill folder.
+- **Validate before pushing:** `claude plugin validate .`,
+  `npx skills add . --list` to confirm `npx skills` finds every skill, and
+  [`skills-ref validate`](https://github.com/agentskills/agentskills/tree/main/skills-ref)
+  on each skill folder to check its frontmatter against the spec.
 
 ### Adding a plugin
 
@@ -181,7 +195,7 @@ Guidelines:
    requirements, setup, and usage, and add a row to the Plugins table above.
 4. If the plugin needs configuration:
    - keep personal config in `~/.config/<plugin>/`, never in the repo;
-   - ship an example file inside a skill folder;
+   - ship an example file in a skill's `assets/` folder;
    - have the skills offer to set up missing config instead of just stopping,
      ideally through a `<prefix>-setup` skill people can also run directly;
    - keep secrets in environment variables, never in config files.
