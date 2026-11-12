@@ -1,6 +1,7 @@
 ---
 name: ticket-explore
 description: Think through an idea, problem, or requirement before it becomes a ticket, as a thinking partner who investigates but never implements. Use when the user wants to explore, brainstorm, or clarify something before proposing it, or to rethink an existing ticket. Also use when the user says "ticket explore".
+compatibility: Requires the gh CLI, signed in. The GitHub Projects backend needs the project scope; the Jira backend needs curl, jq, the jira CLI, and a JIRA_API_TOKEN environment variable.
 ---
 
 # Explore

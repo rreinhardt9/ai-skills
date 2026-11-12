@@ -1,6 +1,7 @@
 ---
 name: ticket-propose
 description: Turn an exploration or a described change into a project-tracker ticket containing the proposal, acceptance criteria, optional design, and task checklist, then put it in the proposed stage for review. Also revises an existing ticket and checks its sections for consistency. Use when the user says "ticket propose", asks to capture or propose a change as a ticket, or asks to review or update a proposed ticket.
+compatibility: Requires the gh CLI, signed in. The GitHub Projects backend needs the project scope; the Jira backend needs curl, jq, the jira CLI, and a JIRA_API_TOKEN environment variable.
 ---
 
 # Propose
@@ -11,7 +12,7 @@ This skill never implements anything.
 
 ## 1. Load the project
 
-Paths below starting `backends/` or `ticket-template.md` are relative to this
+Paths below starting `references/` or `assets/` are relative to this
 skill's own directory.
 
 1. Find the repo key with `gh repo view --json nameWithOwner -q .nameWithOwner`.
@@ -20,9 +21,9 @@ skill's own directory.
    agree, follow the `ticket-setup` skill in the sibling directory
    `../ticket-setup/`, then continue with their original request. If they
    decline, stop.
-3. Read `backends/<backend>.md`. Do every tracker operation exactly as it
+3. Read `references/<backend>.md`. Do every tracker operation exactly as it
    describes.
-4. Read `ticket-template.md`.
+4. Read `assets/ticket-template.md`.
 5. Treat the entry's `context` and its `rules.<section>` as constraints to
    follow. Don't copy them into the ticket.
 

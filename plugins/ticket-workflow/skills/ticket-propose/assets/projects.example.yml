@@ -1,6 +1,6 @@
 # Copy to ~/.config/ticket-workflow/projects.yml and replace the placeholders.
 # Keyed by `gh repo view --json nameWithOwner -q .nameWithOwner` run in the checkout.
-# Backend setup steps live in backends/<backend>.md.
+# Backend setup steps live in references/<backend>.md.
 
 your-org/github-projects-repo:
   backend: github

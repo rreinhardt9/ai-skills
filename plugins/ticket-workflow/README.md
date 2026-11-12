@@ -67,7 +67,7 @@ Each repo needs this once per machine.
 Entries live in `~/.config/ticket-workflow/projects.yml`, which is personal and
 never committed. `ticket-setup` writes it for you, but you can also edit it by
 hand, starting from
-[`skills/ticket-propose/projects.example.yml`](skills/ticket-propose/projects.example.yml).
+[`skills/ticket-propose/assets/projects.example.yml`](skills/ticket-propose/assets/projects.example.yml).
 Each entry is keyed by the repo's `owner/name`:
 
 ```yaml
@@ -108,18 +108,22 @@ skills/
   ticket-explore/SKILL.md
   ticket-propose/
     SKILL.md                also defines how every ticket skill loads its config
-    ticket-template.md      the ticket's sections and how to write each one
-    projects.example.yml    sample config entries
-    backends/
+    scripts/
+      *.jq                  Jira ADF helpers: read as markdown, check off a task, replace a section
+    references/
       github.md             gh commands for each tracker operation, plus project setup
       jira.md               REST and ADF recipes for each operation, plus project setup
-      jira/*.jq             ADF helpers: read as markdown, check off a task, replace a section
+    assets/
+      ticket-template.md    the ticket's sections and how to write each one
+      projects.example.yml  sample config entries
   ticket-apply/SKILL.md
   ticket-verify/SKILL.md
 ```
 
-The shared files live in `ticket-propose/` and not at the plugin root because
-`npx skills` installs only skill folders.
+The shared files live in `ticket-propose/`, in the `scripts/`, `references/`,
+and `assets/` folders the [Agent Skills spec](https://agentskills.io/specification)
+defines. They aren't at the plugin root because `npx skills` installs only skill
+folders.
 
 ## Gotchas
 

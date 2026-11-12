@@ -1,6 +1,7 @@
 ---
 name: ticket-verify
 description: Check that an implementation matches its project-tracker ticket (all tasks done, every acceptance scenario covered by a passing test, design followed), report issues by severity, then optionally post the report, open the PR, and move the ticket to review. Use when the user says "ticket verify", or asks whether a ticket's work is complete or ready for review.
+compatibility: Requires the gh CLI, signed in. The GitHub Projects backend needs the project scope; the Jira backend needs curl, jq, the jira CLI, and a JIRA_API_TOKEN environment variable.
 ---
 
 # Verify
