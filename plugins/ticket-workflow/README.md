@@ -34,11 +34,14 @@ explore ──> propose ──> [you review and edit in the tracker] ──> app
 | `ticket-verify` | Checking work before review | Reports on completeness (tasks done), correctness (each scenario has a passing test), and coherence (design and conventions followed), with each issue graded CRITICAL, WARNING, or SUGGESTION. With your OK, it then posts the report, opens the PR, and moves the ticket to in review. |
 
 The skills refer to each other through sibling directories (`../ticket-propose/`,
-`../ticket-setup/`), so **install all five together**. With `npx skills`:
+`../ticket-setup/`), so **install all five together**. With `gh skill`:
 
 ```bash
-npx skills add rreinhardt9/ai-skills -g --skill ticket-setup --skill ticket-explore \
-  --skill ticket-propose --skill ticket-apply --skill ticket-verify
+gh skill install rreinhardt9/ai-skills ticket-setup --agent claude-code --scope user
+gh skill install rreinhardt9/ai-skills ticket-explore --agent claude-code --scope user
+gh skill install rreinhardt9/ai-skills ticket-propose --agent claude-code --scope user
+gh skill install rreinhardt9/ai-skills ticket-apply --agent claude-code --scope user
+gh skill install rreinhardt9/ai-skills ticket-verify --agent claude-code --scope user
 ```
 
 See the [main README](../../README.md#installation) for the other install paths.
@@ -122,7 +125,7 @@ skills/
 
 The shared files live in `ticket-propose/`, in the `scripts/`, `references/`,
 and `assets/` folders the [Agent Skills spec](https://agentskills.io/specification)
-defines. They aren't at the plugin root because `npx skills` installs only skill
+defines. They aren't at the plugin root because `gh skill` installs only skill
 folders.
 
 ## Gotchas

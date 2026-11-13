@@ -10,10 +10,10 @@ can load them.
 Skills are grouped into plugins, which are sets you install together. The repo
 can be installed several ways from one source:
 
-- as plain skill folders, through [`npx skills`](https://skills.sh), for any agent;
+- as plain skill folders, through [`gh skill`](https://cli.github.com/manual/gh_skill), for any agent;
 - as a Claude Code plugin marketplace, through `.claude-plugin/marketplace.json`;
-- from a local clone, through `npx skills`, for trying out changes before a PR;
-- from a branch on GitHub, through `npx skills`, for trying out a PR's changes.
+- from a local clone, through `gh skill`, for trying out changes before a PR;
+- from a branch on GitHub, through `gh skill`, for trying out a PR's changes.
 
 ## Plugins
 
@@ -30,28 +30,30 @@ Pick one path per machine. Don't combine the Claude Code plugin with another
 path, or the agent sees two copies of each skill (`ticket-apply` and
 `ticket-workflow:ticket-apply`) and may use either one.
 
-### Option 1: `npx skills` (any agent)
+### Option 1: `gh skill` (any agent)
 
-Install the skills from a plugin by name. Each plugin's README lists the
-command for its full set.
+[`gh skill`](https://cli.github.com/manual/gh_skill) is part of the GitHub CLI.
+It installs one skill per command, so run it once for each skill in the plugin.
+Each plugin's README lists its skills.
 
 ```bash
-npx skills add rreinhardt9/ai-skills -g --skill <skill> --skill <skill> ...
+gh skill install rreinhardt9/ai-skills <skill> --agent claude-code --scope user
 ```
 
-This copies each skill into a shared directory and links it into every agent it
-detects. Use `-a claude-code -a opencode` to pick agents. Listing skills with
-`--skill` means you get only those; skills added to this repo later won't
-appear unless you install them.
+`--scope user` installs into your home directory so the skill works in every
+repo. Without it, the skill goes into the current repo. Use `--agent` to pick
+the agent, such as `opencode` or `codex`. To install for more than one agent,
+run the command once per agent. Skills added to this repo later won't appear
+unless you install them.
 
 ```bash
-npx skills check -g     # see what's changed upstream
-npx skills update -g    # pull the changes
+gh skill update --dry-run   # see what's changed upstream
+gh skill update --all       # pull the changes
 ```
 
 The installed copies are snapshots, not git checkouts. Edits made to them
-aren't saved anywhere and may be lost on update. To change a skill, see
-[Contributing](#contributing).
+aren't saved anywhere, and `gh skill update --force` overwrites them. To change
+a skill, see [Contributing](#contributing).
 
 ### Option 2: Claude Code plugin marketplace
 
@@ -69,38 +71,38 @@ keys or a credential helper), or with `GITHUB_TOKEN` if it's set.
 
 ### Option 3: From a local clone (for trying out changes)
 
-`npx skills` also installs from a path on disk. Pass the same `--skill` list as
-Option 1:
+`gh skill` also installs from a path on disk with `--from-local`. Run it for
+each skill, as in Option 1:
 
 ```bash
 git clone git@github.com:rreinhardt9/ai-skills.git ~/dev/ai-skills
-npx skills add ~/dev/ai-skills -g --skill <skill> --skill <skill> ... -y
+gh skill install ~/dev/ai-skills <skill> --from-local --agent claude-code --scope user --force
 ```
 
-This copies the clone's current files rather than linking to them, so edits in
-the clone take effect only when you run the command again. `npx skills update`
-skips skills installed from a path, and `npx skills check -g` lists them as
-"Local path", which reminds you which skills aren't on the released version.
-Its suggested update command omits `--skill`, which would install every skill
-in the repo, so keep passing your list.
+`--force` replaces the copy that's already installed without prompting. This
+copies the clone's current files rather than linking to them, so edits in the
+clone take effect only when you run the command again. `gh skill update` skips
+skills installed from a path and reports that each one "has no GitHub
+metadata", which reminds you which skills aren't on the released version.
 
-To go back to the released version, run Option 1's command again.
+To go back to the released version, run Option 1's command again with
+`--force`.
 
 ### Option 4: From a branch (for reviewing a PR)
 
-`npx skills` also installs from a branch on GitHub, named after `#`, with no
-clone needed. Pass the same `--skill` list as Option 1:
+`gh skill` also installs from a branch on GitHub with `--pin`, with no clone
+needed. Run it for each skill, as in Option 1:
 
 ```bash
-npx skills add rreinhardt9/ai-skills#<branch> -g --skill <skill> --skill <skill> ... -y
+gh skill install rreinhardt9/ai-skills <skill> --pin <branch> --agent claude-code --scope user --force
 ```
 
-The branch is remembered, so `npx skills update -g` pulls new commits pushed to
-it, such as fixes made during review. For a PR from a fork, use the fork's name
-in place of `rreinhardt9/ai-skills`.
+`gh skill update` skips pinned skills, so to pick up new commits pushed to the
+branch, such as fixes made during review, run the command again. For a PR from
+a fork, use the fork's name in place of `rreinhardt9/ai-skills`.
 
-To go back to the released version, run Option 1's command again, which also
-forgets the branch.
+To go back to the released version, run Option 1's command again with
+`--force`, which also clears the pin.
 
 ## Using skills in OpenCode
 
@@ -169,9 +171,10 @@ Guidelines:
 - **Group skills into plugins by what people would install together.** People
   install whole plugins, so a skill added to an existing plugin reaches everyone
   who has it on their next update. A standalone skill gets its own plugin.
-- **List every skill in `marketplace.json`.** `npx skills` finds skills under
-  `plugins/` only through that file.
-- **Put files a skill reads inside a skill folder.** `npx skills` copies only
+- **Keep every skill at `plugins/<plugin>/skills/<skill>/SKILL.md`.** That's
+  where `gh skill` looks for them. Also list each one in `marketplace.json`,
+  which the Claude Code plugin reads.
+- **Put files a skill reads inside a skill folder.** `gh skill` copies only
   skill folders, so files at the plugin root or repo root never reach those
   installs. Skills in the same plugin can share files through a sibling path
   like `../other-skill/`.
@@ -182,7 +185,7 @@ Guidelines:
   and templates or examples in `assets/`, and refer to them by paths relative
   to the skill folder.
 - **Validate before pushing:** `claude plugin validate .`,
-  `npx skills add . --list` to confirm `npx skills` finds every skill, and
+  `gh skill publish --dry-run` to confirm `gh skill` finds every skill, and
   [`skills-ref validate`](https://github.com/agentskills/agentskills/tree/main/skills-ref)
   on each skill folder to check its frontmatter against the spec.
 
