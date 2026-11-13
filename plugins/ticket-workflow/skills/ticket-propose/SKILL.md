@@ -2,6 +2,7 @@
 name: ticket-propose
 description: Turn an exploration or a described change into a project-tracker ticket containing the proposal, acceptance criteria, optional design, and task checklist, then put it in the proposed stage for review. Also revises an existing ticket and checks its sections for consistency. Use when the user says "ticket propose", asks to capture or propose a change as a ticket, or asks to review or update a proposed ticket.
 compatibility: Requires the gh CLI, signed in. The GitHub Projects backend needs the project scope; the Jira backend needs curl, jq, the jira CLI, and a JIRA_API_TOKEN environment variable.
+license: MIT
 ---
 
 # Propose

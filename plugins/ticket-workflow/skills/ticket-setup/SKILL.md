@@ -2,6 +2,7 @@
 name: ticket-setup
 description: Set up the ticket workflow on this machine and for the current repo, by checking prerequisites and writing the repo's entry in the personal projects.yml config. Use when the user says "ticket setup", asks to set up or configure the ticket workflow for a repo, or when another ticket skill finds the config missing.
 compatibility: Requires the gh CLI, signed in. The GitHub Projects backend needs the project scope; the Jira backend needs curl, jq, the jira CLI, and a JIRA_API_TOKEN environment variable.
+license: MIT
 ---
 
 # Setup

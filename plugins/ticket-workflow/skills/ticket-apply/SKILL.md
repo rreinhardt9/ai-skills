@@ -2,6 +2,7 @@
 name: ticket-apply
 description: Implement an approved project-tracker ticket by working through its task checklist outside-in, with tests first, checking off tasks in the ticket as they're done. Use when the user says "ticket apply", or asks to implement, start, or continue work on a ticket.
 compatibility: Requires the gh CLI, signed in. The GitHub Projects backend needs the project scope; the Jira backend needs curl, jq, the jira CLI, and a JIRA_API_TOKEN environment variable.
+license: MIT
 ---
 
 # Apply
