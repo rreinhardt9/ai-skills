@@ -21,6 +21,15 @@
         "./skills/ticket-apply",
         "./skills/ticket-verify"
       ]
+    },
+    {
+      "name": "spec-prune",
+      "description": "Audit and prune an RSpec or Minitest suite one user flow at a time, so the tests read as the app's specification and still prove it",
+      "source": "spec-prune",
+      "strict": false,
+      "skills": [
+        "./skills/spec-prune"
+      ]
     }
   ]
 }
