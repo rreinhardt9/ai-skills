@@ -20,6 +20,7 @@ can be installed several ways from one source:
 | Plugin | Skills | What it's for |
 |---|---|---|
 | [`ticket-workflow`](plugins/ticket-workflow/README.md) | `ticket-setup`, `ticket-explore`, `ticket-propose`, `ticket-apply`, `ticket-verify` | Plan each change in a GitHub Projects or Jira ticket, then implement and verify it test-first against that ticket. |
+| [`spec-prune`](plugins/spec-prune/README.md) | `spec-prune` | Audit a Ruby test suite one user flow at a time, prune what doesn't specify behavior, and check with profiling and a coverage diff that nothing was lost. |
 
 Each plugin's README covers its requirements, setup, and usage. Read it before
 installing, because some plugins need one-time configuration.
